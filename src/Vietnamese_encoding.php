@@ -21,6 +21,9 @@
 
 function Vietnamese_encoding($encodings, $string) {
 
+	// Input array encodings, should be limited to "VPS", "VNI", VISCII", "VIQR", "VN_HTML"
+	// Return array(string encoding, float confidence)
+
 	$Vietnamese = array("anh"=>13.5633, "tôi"=>11.0973, "tơi"=> 11.0973, "là"=>8.0225, "ta"=>7.7103, "đi"=>7.2577, "em"=>6.727, "con"=>5.9934, "đó"=>5.8842, "gì"=>5.6032, "đây"=>5.1038, "cô"=>5.0882, "chúng"=>4.6043, "sao"=>4.5575, "rồi"=>4.5107, "được"=>4.2766);
 
 	foreach ($encodings as $encoding) {

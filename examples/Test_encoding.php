@@ -58,18 +58,14 @@ if (isset($_FILES['userfile']['size'][0])) {
 		require_once '../src/EncoDet.php';
 		$encoding = EncoDet($string);
 
-		if ($encoding[1] != "Unknown") {
-			if (strpos($encoding[1], "|")) {
+		if (strpos($encoding[1], "|")) {
 				require_once "../tools/Show_Alternatives.php";
 				show_alternatives($string, $encoding[1]);
-				$first_encoding = substr($encoding[1], 0, strpos($encoding[1], "|"));
 			}
-			else $first_encoding = $encoding[1];
-			$stringUTF = convert($first_encoding, 'UTF-8', $string);
-			require_once "../src/Detect_UTF8_Language.php";
-			$encoding[0] =  detect_UTF8_language($stringUTF, $encoding);	
-		}
-		
+
+		require_once "../src/Detect_UTF8_Language.php";
+		$encoding[0] =  detect_UTF8_language($string, $encoding);			
+
 		echo $encoding[0]." ".$encoding[1]." ".round($encoding[2])."%<br/>";
 
 		ob_start(); 

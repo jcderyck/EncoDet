@@ -21,6 +21,9 @@
 
 function show_alternatives($string, $encoding) {
 
+	//	Print snippets of text on screen, showing differences between input array of encodings
+	//  Returns null;
+
 	if (!strpos($encoding, "|")) return;
 
 	$encodings = explode("|", $encoding);

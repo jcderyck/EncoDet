@@ -21,9 +21,9 @@
 
 function SM_latin_encoding($encodings, $lang_name, $string) {
 
-/*	-- State machine algorithm to determine latin encoding --
-	Returns array with best encoding and its probability to SM_latin_encoding
-*/
+//	Input (array encodings, string lang_name, string text)
+//	Returns array (string encoding, float confidence)
+
 
 	global $diacritics, $common_words, $common_symbols;
 	

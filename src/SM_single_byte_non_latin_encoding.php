@@ -21,6 +21,8 @@
 
 function SM_single_byte_non_latin_encoding($string) {
 
+	// Return array(string language, string encoding, float confidence)
+
 	global $non_latin_letters;
 
 	$enc_names =  array(array('CP1251', 'ISO-8859-5', 'MacCyrillic', 'KOI8-RU', 'CP855', 'CP866'),

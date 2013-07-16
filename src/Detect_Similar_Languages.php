@@ -21,6 +21,10 @@
 
 function Detect_Similar_Languages($string, $language) {
 
+	// Input language is either "Serbo_Croat", "Portuguese_Brazilian", "Danish_Norwegian" or Bahasa"
+	// Return string language (eg "Croatian")
+	// If specific language cannot be determined, it will return string "language1|language2"
+
 	switch ($language) {
 		case 'Serbo_Croat':
 

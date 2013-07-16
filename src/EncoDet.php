@@ -23,6 +23,10 @@ require_once 'Data.php';
 
 function EncoDet($string) {
 
+// Return array(string language, string encoding, float confidence)
+// The encoding is either ICONV name-compliant, or "Unknown" if confidence < 50%,
+// or start with "Non-compliant" (eg "Non-compliant BIG5") for multibyte CJK encodings 
+
 	//	TEST 7-BIT ENCODINGS
 	//	--------------------
 	require_once 'SM_7bit_encoding.php';

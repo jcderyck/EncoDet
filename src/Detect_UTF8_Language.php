@@ -21,11 +21,17 @@
 
 function detect_UTF8_language($string, $encoding) {
 
+	// Input encoding must be array(string language, string encoding, float confidence)
+	// Return string language, or "Unknown" if confidence < 80
+
 	global $latin_words, $non_latin_letters, $non_latin_words, $CJKI_words;
 
+	if ($encoding[1] == "Unknown") return $encoding[0]; // No encoding detected => cannot proceed
+	if (strpos($encoding[1], "|")) $encoding[1] = substr($encoding[1], 0, strpos($encoding[1], "|")); // Perform function with first possible encoding
+	$stringUTF = convert(encoding[1], 'UTF-8', $string);
 
 	// CJK detection
-	preg_match_all('~[^\P{L}A-Za-z]~u', $string, $letters);
+	preg_match_all('~[^\P{L}A-Za-z]~u', $stringUTF, $letters);
 	$letters = array_count_values($letters[0]);
 	arsort($letters);
 	
@@ -43,8 +49,8 @@ function detect_UTF8_language($string, $encoding) {
 	if (isset($letters['ന'])) $results['Malayalam'] = array_sum(array_intersect_key($CJKI_words['Malayalam'], $letters));
 	
 	// Latin languages detection	
-	$string = mb_strtolower($string, 'UTF-8');
-	$total = preg_match_all('~\p{L}+~u', $string, $words)/100;
+	$stringUTF = mb_strtolower($stringUTF, 'UTF-8');
+	$total = preg_match_all('~\p{L}+~u', $stringUTF, $words)/100;
 	$words = array_count_values($words[0]);
 
 	foreach ($latin_words as $latin_lang=>$values) {
@@ -65,7 +71,7 @@ function detect_UTF8_language($string, $encoding) {
 	switch ($top_lang_name) {
 		case 'Serbo_Croat'; case 'Portuguese_Brazilian'; case 'Danish_Norwegian'; case 'Bahasa':
 			require_once "Detect_Similar_Languages.php";
-			$top_lang_name = Detect_Similar_Languages($string, $top_lang_name);
+			$top_lang_name = Detect_Similar_Languages($stringUTF, $top_lang_name);
 	}
 
 	$top_result = current($results);
@@ -85,7 +91,7 @@ function detect_UTF8_language($string, $encoding) {
 		switch ($next_lang_name) {
 			case 'Serbo_Croat'; case 'Portuguese_Brazilian'; case 'Danish_Norwegian'; case 'Bahasa':
 				require_once "Detect_Similar_Languages.php";
-				$next_lang_name = Detect_Similar_Languages($string, $next_lang_name);
+				$next_lang_name = Detect_Similar_Languages($stringUTF, $next_lang_name);
 		}
 
 		if ($prevalence['English'] < 25 && $top_lang_name == 'English') return $next_lang_name;

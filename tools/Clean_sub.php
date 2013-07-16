@@ -23,6 +23,7 @@ function clean_sub($string) {
 
 	// Cleans all timecodes and tags from sub files
 	// without removing non-ascii chars, to prevent changing encoding
+	// Returns cleaned string
 
 	$partT = substr($string,0,100);
 

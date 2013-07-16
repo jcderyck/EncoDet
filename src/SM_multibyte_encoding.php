@@ -21,9 +21,9 @@
 
 function SM_multibyte_encoding($string) {
 
-//	Algorithm for detecting CJK (Chinese, Japanese and Korean) languages multibyte encodings.
-//	It sorts the 15 most popular high bytes, and compares them to typical prevalence for each encoding. 
-//	Note: subsets are not used (eg CP949 is a superset of EUC-KR)
+//	Returns array(string language, string encoding, float confidence)
+
+//	Note: subsets are not listed (eg EUC-KR is a subset of CP949 so is not tested)
 
 	global $CJK_bytes;
 

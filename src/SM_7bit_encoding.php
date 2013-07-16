@@ -22,7 +22,8 @@
 function SM_7bit_encoding($string) {
 
 //	Algorithm to determine which 7-bit encoding is used.
-//	Test ISO-2022, then HZ. If no result, assumed to be ASCII
+//	Test ISO-2022, then HZ. If no result, assumed to be ASCI
+//  Return array(string language, string encoding, float confidence)
 
 	if (preg_match('~[\x80-\xFF]~', $string)) return array("", 0, "", 0);
 

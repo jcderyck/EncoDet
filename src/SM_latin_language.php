@@ -21,8 +21,12 @@
 
 function SM_latin_language($string) {
 
-	// returns language name (for encoding detection purpose only),
-	// encoding name and encoding probalbility	
+	// Return array(string language, string encoding, float confidence
+	// Returned language is for encoding detection purpose only,
+	// final language detection should be done on the UTF-8 converted string with Detect_UTF8_Language.php
+	
+	// Note: subsets are not tested (eg ISO-8859-1 is a subset of CP1252, 
+	// except for C1 control codes which should not appear in text, so is not listed)
 
 	global $latin_words;
 	
