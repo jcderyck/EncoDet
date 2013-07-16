@@ -28,7 +28,7 @@ function detect_UTF8_language($string, $encoding) {
 
 	if ($encoding[1] == "Unknown") return $encoding[0]; // No encoding detected => cannot proceed
 	if (strpos($encoding[1], "|")) $encoding[1] = substr($encoding[1], 0, strpos($encoding[1], "|")); // Perform function with first possible encoding
-	$stringUTF = convert(encoding[1], 'UTF-8', $string);
+	$stringUTF = convert($encoding[1], 'UTF-8', $string);
 
 	// CJK detection
 	preg_match_all('~[^\P{L}A-Za-z]~u', $stringUTF, $letters);
