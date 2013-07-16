@@ -64,6 +64,7 @@ if (isset($_FILES['userfile']['size'][0])) {
 			}
 
 		require_once "../src/Detect_UTF8_Language.php";
+
 		$encoding[0] =  detect_UTF8_language($string, $encoding);			
 
 		echo $encoding[0]." ".$encoding[1]." ".round($encoding[2])."%<br/>";

@@ -45,7 +45,7 @@ function SM_7bit_encoding($string) {
 
 //  Seek two '~{...}~' sequences for HZ encoding
 	if (preg_match('#~\{[^~]+~\}.+~\{[^~]+~\}#sU', $string)) { // HZ Chinese
-		if (@iconv('HZ','HZ', $string)) {echo 'XXX'; return array("Chinese", "HZ", 100);}
+		if (@iconv('HZ','HZ', $string)) return array("Chinese", "HZ", 100);
 		return array("Chinese", "Non-compliant HZ", 50);
 	}
 

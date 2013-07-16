@@ -119,13 +119,14 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 	if (empty($encodings)) return array("", 0);
 
 	arsort($results);
+
 	$top_encoding = key($results);
 
 	// total of words or symbols in document
 	$total = preg_match_all('~[A-Za-z]*[\x80-\xFF][A-Za-z\x80-\xFF]*~', $string, $words)/100;
-
 	foreach ($encodings as $key=>$encoding) $results[$encoding] = $results[$encoding]/$total;
 	$top_result = current($results);
+
 	if ($top_result < 50) return array("", 0);
 
 	// if other encodings have same result, append name to top_result

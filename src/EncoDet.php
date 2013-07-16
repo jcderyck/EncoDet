@@ -75,7 +75,7 @@ function EncoDet($string) {
 // Convert encoding, deals with non-compliant CJK, and Vietnamese encodings unsupported by iconv
 // You can add here any encoding not supported by iconv, by mapping to a supported one (see below for examples)
 function convert($enc_in, $enc_out, $string) {
-	
+
 	if (strpos($enc_in, "on-compliant")) {
 		$enc_in = substr($enc_in, 14);
 		return mb_convert_encoding($string, $enc_out, $enc_in);

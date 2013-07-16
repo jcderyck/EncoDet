@@ -54,11 +54,11 @@ function SM_latin_language($string) {
 	switch ($lang_name) {
 
 		case 'Breton':
-			$encodings = array('CP1252', 'ISO-8859-14', 'MacCeltic');
+			$encodings = array('CP1252', 'ISO-8859-1', 'ISO-8859-14', 'MacCeltic');
 			break;
 
 		case 'French'; case 'Italian'; case 'Luxemburg':
-			$encodings = array('CP1252', 'ISO-8859-15', 'MacRoman', 'CP850');
+			$encodings = array('CP1252', 'ISO-8859-1', 'ISO-8859-15', 'MacRoman', 'CP850');
 			break;
 
 		case 'Esperanto':
@@ -67,15 +67,15 @@ function SM_latin_language($string) {
 
 		case 'Catalan';	case 'Dutch'; case 'Galician';
 		case 'Occitan'; case 'Spanish'; case 'English';	case 'Bahasa':
-			$encodings = array('CP1252', 'ISO-8859-15', 'MacRoman', 'CP850');
+			$encodings = array('CP1252', 'ISO-8859-1', 'ISO-8859-15', 'MacRoman', 'CP850');
 			break;
 
 		case 'Portuguese_Brazilian':
-			$encodings = array('CP1252', 'ISO-8859-15', 'MacRoman', 'CP860');
+			$encodings = array('CP1252', 'ISO-8859-1', 'ISO-8859-15', 'MacRoman', 'CP860');
 			break;
 
 		case 'Danish_Norwegian'; case 'Swedish'; case 'Finnish':
-			$encodings = array('CP1252', 'ISO-8859-4', 'ISO-8859-10', 'ISO-8859-13', 'ISO-8859-15', 'MacRoman', 'CP865');
+			$encodings = array('CP1252', 'ISO-8859-1', 'ISO-8859-4', 'ISO-8859-10', 'ISO-8859-13', 'ISO-8859-15', 'MacRoman', 'CP865');
 			break;
 
 		case 'Estonian':
@@ -91,15 +91,15 @@ function SM_latin_language($string) {
 			break;
 
 		case 'German':
-			$encodings = array('CP1252', 'CP1250', 'ISO-8859-2', 'ISO-8859-15', 'MacRoman', 'CP850');
+			$encodings = array('CP1252', 'CP1250', 'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-15', 'MacRoman', 'CP850');
 			break;
 
 		case 'Icelandic':
-			$encodings = array('CP1252', 'ISO-8859-15', 'MacIceland', 'CP861');
+			$encodings = array('CP1252', 'ISO-8859-1', 'ISO-8859-15', 'MacIceland', 'CP861');
 			break;
 
 		case 'Albanian':
-			$encodings = array('CP1252', 'CP1250', 'ISO-8859-15', 'ISO-8859-2', 'MacRoman', 'MacCentralEurope', 'CP850');
+			$encodings = array('CP1252', 'CP1250', 'ISO-8859-1', 'ISO-8859-15', 'ISO-8859-2', 'MacRoman', 'MacCentralEurope', 'CP850');
 			break;
 
 		case 'Czech'; case 'Hungarian'; case 'Polish'; case 'Slovak':

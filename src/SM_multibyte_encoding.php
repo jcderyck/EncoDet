@@ -47,7 +47,7 @@ function SM_multibyte_encoding($string) {
 	if (!isset($results)) return array("", "", 0);
 	
 	arsort($results);
-	
+
 	$result = key($results);
 	$percent = current($results);
 
