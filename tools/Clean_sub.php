@@ -53,6 +53,7 @@ function clean_sub($string) {
 
 	} elseif (strpos($partT,'<SAMI>') !== false) {		// SAMI Captioning .smi
 		$string = preg_replace('~<[\x00-\x3B\x3D\x3F-\x7F]+>~',"", $string);	// remove all ascii tags
+		$string = preg_replace('~&nbsp;~'," ", $string);	// remove all ascii tags
 
 	} elseif (strpos($partT,'[INFORMATION]') !== false) {		// SubViewer 2.0 .txt
 		$string = preg_replace('~^[\x00-\x7F]*(\d\d:\d\d:\d\d\.\d\d,\d\d:\d\d:\d\d\.\d\d)~U',"$1",$string,1); // remove all before first line
