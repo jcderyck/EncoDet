@@ -45,8 +45,9 @@ function detect_UTF8_language($string, $encoding) {
 	if (isset($letters['क'])) $results['Hindi'] = array_sum(array_intersect_key($CJKI_words['Hindi'], $letters));
 	if (isset($letters['க'])) $results['Tamil'] = array_sum(array_intersect_key($CJKI_words['Tamil'], $letters));
 	if (isset($letters['న'])) $results['Telugu'] = array_sum(array_intersect_key($CJKI_words['Telugu'], $letters));
-	if (isset($letters['น'])) $results['Thai'] = array_sum(array_intersect_key($CJKI_words['Thai'], $letters));
 	if (isset($letters['ന'])) $results['Malayalam'] = array_sum(array_intersect_key($CJKI_words['Malayalam'], $letters));
+	if (isset($letters['น'])) $results['Thai'] = array_sum(array_intersect_key($CJKI_words['Thai'], $letters));
+
 	
 	// Latin languages detection	
 	$stringUTF = mb_strtolower($stringUTF, 'UTF-8');
@@ -82,7 +83,7 @@ function detect_UTF8_language($string, $encoding) {
 
 		if ($top_lang_name != "English" && $next_lang_name != "English") return $top_lang_name;
 
-		$prevalence['English'] = 5.4*array_sum(array_intersect_key($words, $latin_words['English']));
+		$prevalence['English'] = 5.4*array_sum(array_intersect_key($words, $latin_words['English']))/$total;
 
 		if ($prevalence['English'] > 75) return 'English';
 
