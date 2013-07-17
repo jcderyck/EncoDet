@@ -71,7 +71,7 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 	}
 	if (empty($encodings)) return array("", 0);
 	
-	elseif (count($encodings) != 1) foreach ($encodings as $key=>$encoding) {
+	foreach ($encodings as $key=>$encoding) {
 	
 		// number of common symbols
 		$results[$encoding] += 0.99*preg_match_all('~[´‘’—\x{C2A0}]~u', $stringUTF[$encoding], $words);
