@@ -62,9 +62,8 @@ function EncoDet($string) {
 	require_once 'SM_latin_language.php';
 	$encoding = SM_latin_language($string);
 	if ($encoding[1] == "") {
-		// all single-byte encodings exhausted, retry UTF-8 and GB18030 as they were queried on >3 high bytes only
-		if (@iconv('UTF-8', 'UTF-8', $string)) $encoding = array($encoding[0], "UTF-8", 50);
-		elseif (@iconv('GB18030', 'GB18030', $string)) $encoding = array($encoding[0], "GB18030", 50);
+		// all single-byte encodings exhausted, retry GB18030 as it was queried on >2 high bytes only
+		if (@iconv('GB18030', 'GB18030', $string)) $encoding = array($encoding[0], "GB18030", 50);
 		else $encoding = array($encoding[0], "Unknown", 0);
 	}
 

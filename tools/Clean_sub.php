@@ -50,6 +50,10 @@ function clean_sub($string) {
 		$string = implode("\x0D\x0A", $text[3]);
 		$string .= " ".$tags; // append non-ascii tags at the end of sub
 		$string = str_ireplace("\\n", "\x0D\x0A", $string);
+		// for aegisub .ass
+		$string = str_replace("\\h", " ", $string);
+		$string = preg_replace('~\{\\\\p[123]\}[mnlbspc\s\d]+\{\\\\p0\}~', "", $string);
+		$string = preg_replace('~\{\\\\[\x00-\x09\x0B\x0C\x0E-\x7A\x7C\x7E\x7F]+\}~', "", $string);
 
 	} elseif (strpos($partT,'<SAMI>') !== false) {		// SAMI Captioning .smi
 		$string = preg_replace('~<[\x00-\x3B\x3D\x3F-\x7F]+>~',"", $string);	// remove all ascii tags
@@ -72,8 +76,10 @@ function clean_sub($string) {
 	}
 
 
-	$string = preg_replace('~\[[\x00-\x09\x0B\x0C\x0E-\x5A\x5C\x5E-\x7F]*\]~U',"", $string);	// remove everything in [ ] on a line (names for hearing impaired ect)
-	$string = preg_replace('~\<[\x00-\x09\x0B\x0C\x0E-\x3B\x3D\x3F-\x7F]*\>~U',"", $string);	// remove everything in < > on a line
+	$string = preg_replace('~\[[\x00-\x09\x0B\x0C\x0E-\x5A\x5C\x5E-\x7F]*\]~U',"", $string);	// remove ascii in [ ] on a line (names for hearing impaired ect)
+	$string = preg_replace('~\<[\x00-\x09\x0B\x0C\x0E-\x3B\x3D\x3F-\x7F]*\>~U',"", $string);	// remove ascii in < > on a line
+//	$string = preg_replace('~\{[\x00-\x09\x0B\x0C\x0E-\x7A\x7C\x7E\x7F]*\}~U',"", $string);	// remove ascii in { } on a line
+
 	// remove ad from subtitle sites
 	$string = str_replace('Subtitles downloaded from www.OpenSubtitles.org',"", $string);
 	$string = str_replace('Best watched using Open Subtitles MKV Player',"", $string);

@@ -131,6 +131,8 @@ function SM_latin_language($string) {
 
 	if ($lang_name != "Vietnamese") {
 		require_once "SM_latin_encoding.php";
+		// add UTF-8 in the competition
+		$encodings = array_merge($encodings, array('UTF-8'));
 		$result = SM_latin_encoding($encodings, $lang_name, $string);
 	}
 	return array($lang_name, $result[0], $result[1]);

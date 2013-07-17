@@ -54,7 +54,7 @@ if (isset($_FILES['userfile']['size'][0])) {
 		// not required but faster
 		require_once "../tools/Clean_sub.php";
 		$string = clean_sub($string);
-		
+
 		require_once '../src/EncoDet.php';
 		$encoding = EncoDet($string);
 
