@@ -128,5 +128,5 @@
 		'~\bmás\b~ui', '~\bmaîtres?\b~ui', '~\bsanté\b~ui', '~\bniñ[oa]s?\b~ui', '~\bquién\b~ui', '~\bplaît\b~ui', '~\bcómo\b~ui', '~\bsoufflée?s?\b~ui',
 		'~schön\b~ui', '~\bs[ìí]\b~ui', '~\bmâchée?s?\b~ui', '~\bbrûlée?s?\b~ui', '~\bgrâce\b~ui', '~\bqué\b~ui');
 
-	$common_symbols = array('´‘’— ', '~\W[“„«–] ?\w~u', '~\w…\W~u', '~[€£±] ?\d~u', '~© ?\d\d~u', '~\W[¿¡] ?qu~ui', '~\x0A[¶¤] ?\w~u',
-								'~\w[\.\?!]? ?[”»–]\W~u', '~\d ?[€°¼½¾‰]~u', '~\Wnº~u', '~\w[\.\?!:]? ?[¶¤][\x0D\x0A]~u');
+	$common_symbols = array('´‘’— ', array('~\W[“„«–] ?\w~u', '~\w…\W~u', '~[€£±] ?\d~u', '~© ?\d\d~u', '~\W[¿¡] ?qu~ui', '~\x0A[¶¤] ?\w~u'),
+								array('~\w[\.\?!]? ?[”»–]\W~u', '~\d ?[€°¼½¾‰]~u', '~\Wnº~u', '~\w[\.\?!:]? ?[¶¤][\x0D\x0A]~u'));
