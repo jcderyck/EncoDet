@@ -97,9 +97,8 @@ function Detect_Similar_Languages($string, $language) {
 			$result['Malay'] = 0; $result['Indonesian'] = 0;
 
 			preg_match_all('~\p{L}+~u', $string, $words);
-			$words = array_count_values($words[0]);
-			$result['Malay'] = count(array_intersect_key($Malay, $words));
-			$result['Indonesian'] = count(array_intersect_key($Indonesian, $words));
+			$result['Malay'] = count(array_intersect($words[0], $Malay));
+			$result['Indonesian'] = count(array_intersect($words[0], $Indonesian));
 			if ($result['Malay'] == $result['Indonesian']) return 'Malay|Indonesian';
 			arsort($result);
 			return key($result);
