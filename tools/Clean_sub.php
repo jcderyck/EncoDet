@@ -53,7 +53,7 @@ function clean_sub($string) {
 		// for aegisub .ass
 		$string = str_replace("\\h", " ", $string);
 		$string = preg_replace('~\{\\\\p[123]\}[mnlbspc\s\d]+\{\\\\p0\}~', "", $string);
-		$string = preg_replace('~\{\\\\[\x00-\x09\x0B\x0C\x0E-\x7A\x7C\x7E\x7F]+\}~', "", $string);
+		$string = preg_replace('~\{[\x00-\x09\x0B\x0C\x0E-\x7A\x7C\x7E\x7F]+\}~', "", $string);
 
 	} elseif (strpos($partT,'<SAMI>') !== false) {		// SAMI Captioning .smi
 		$string = preg_replace('~<[\x00-\x3B\x3D\x3F-\x7F]+>~',"", $string);	// remove all ascii tags

@@ -32,12 +32,12 @@ function SM_latin_language($string) {
 	
 	$stringLC = strtolower($string);
 	preg_match_all('~[a-z\x80-\xFF]+~', $stringLC, $words);
-	$words = array_count_values($words[0]);
-	arsort($words);
+	$words = array_unique($words[0]);
+	$words = array_flip(preg_filter('~^[a-z]+$~', "$0", $words));
 
 	// for each language if word is present in sub, add word value
-	foreach ($latin_words as $lang_name => $word_values) {
-		$results[$lang_name] = array_sum(array_intersect_key($word_values, $words));
+	foreach ($latin_words as $lang_name => $lang_words) {
+		$results[$lang_name] = array_sum(array_intersect_key($lang_words, $words));
 	}
 
 	arsort($results);

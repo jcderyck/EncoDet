@@ -35,17 +35,16 @@ function Detect_Similar_Languages($string, $language) {
 			$Bosnian  = array(38.0156, 2.1824, 0.1346, 11.4412, 1.3268, 21.5941, 0.0385, 8.5088, 0.2404, 16.5176);
 			$Serbian  = array(37.3331, 2.9424, 0.0604, 12.6881, 20.2948, 0.2719, 8.0176, 0.0604, 18.1077, 0.2236);
 
-			$result['Croatian'] = 0; $result['Bosnian'] = 0; $result['Serbian'] = 0;
-
 			foreach ($patterns as $key=>$pattern) $occurence[$key] = preg_match_all($pattern, $string, $matches);
 			$total = array_sum($occurence)/100;
 			if (!$total) return 'Croatian|Bosnian|Serbian';
+
 			foreach ($occurence as $key=>$value) $occurence[$key] = $value/$total;
-			foreach ($occurence as $key=>$value) {
-				$result['Croatian'] += min($Croatian[$key], $value);
-				$result['Bosnian']  += min($Bosnian[$key], $value);
-				$result['Serbian']  += min($Serbian[$key], $value);
-			}
+
+			$result['Croatian'] = array_sum(array_map("min", $Croatian, $occurence));
+			$result['Bosnian']  = array_sum(array_map("min", $Bosnian, $occurence));
+			$result['Serbian']  = array_sum(array_map("min", $Serbian, $occurence));
+			
 			arsort($result);
 			return key($result);
 
@@ -57,16 +56,15 @@ function Detect_Similar_Languages($string, $language) {
 			$Portuguese = array(77.1911, 1.056, 6.9342, 8.2717, 0.0704, 3.2383, 2.6751, 0.5632);
 			$Brazilian  = array(0.2681, 9.2493, 0.134, 83.9143, 0, 0.5362, 0.4021, 5.496);
 
-			$result['Portuguese'] = 0; $result['Brazilian'] = 0;
-
 			foreach ($patterns as $key=>$pattern) $occurence[$key] = preg_match_all($pattern, $string, $matches);
 			$total = array_sum($occurence)/100;
 			if (!$total) return 'Portuguese|Brazilian';
+
 			foreach ($occurence as $key=>$value) $occurence[$key] = $value/$total;
-			foreach ($occurence as $key=>$value) {
-				$result['Portuguese'] += min($Portuguese[$key], $value);
-				$result['Brazilian']  += min($Brazilian[$key], $value);
-			}
+
+			$result['Portuguese'] = array_sum(array_map("min", $Portuguese, $occurence));
+			$result['Brazilian']  = array_sum(array_map("min", $Brazilian, $occurence));
+
 			arsort($result);
 			return key($result);
 
@@ -76,16 +74,15 @@ function Detect_Similar_Languages($string, $language) {
 			$Danish     = array(0.0341, 61.384, 6.8427, 0.5822, 17.7127);
 			$Norwegian  = array(12.4508, 55.6173, 0.1885, 11.3756, 5.923);
 
-			$result['Danish'] = 0; $result['Norwegian'] = 0;
-
 			foreach ($patterns as $key=>$pattern) $occurence[$key] = preg_match_all($pattern, $string, $matches);
 			$total = array_sum($occurence)/100;
 			if (!$total) return 'Danish|Norwegian';
+
 			foreach ($occurence as $key=>$value) $occurence[$key] = $value/$total;
-			foreach ($occurence as $key=>$value) {
-				$result['Danish'] += min($Danish[$key], $value);
-				$result['Norwegian']  += min($Norwegian[$key], $value);
-			}
+
+			$result['Danish'] = array_sum(array_map("min", $Danish, $occurence));
+			$result['Norwegian']  = array_sum(array_map("min", $Norwegian, $occurence));
+
 			arsort($result);
 			return key($result);
 

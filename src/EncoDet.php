@@ -80,7 +80,6 @@ function convert($enc_in, $enc_out, $string) {
 		return mb_convert_encoding($string, $enc_out, $enc_in);
 	}
 	
-	$enc_out .= "//IGNORE"; 
 
 	switch($enc_in) {
 		case "VNI":
@@ -106,7 +105,7 @@ function convert($enc_in, $enc_out, $string) {
 
 		case "VN_HTML":
 			$string = iconv('CP1252', 'UTF-8', $string);
-			$string = html_entity_decode($string);
+			$string = html_entity_decode($string, ENT_QUOTES);
 			return ($string);
 
 		default:
