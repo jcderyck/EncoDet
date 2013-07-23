@@ -34,11 +34,14 @@ function EncoDet($string) {
 	if ($encoding[1] != "") return $encoding;
 
 	// at least three adjacent high byte characters to test high byte encodings
-	if (preg_match('~[\x80-\xFF]{3}~', $string)) { 
+	if (preg_match('~[\x80-\xFF]{3}~', $string)) {
 
 		// IF UTF-8 COMPLIANT, THEN ASSUMED TO BE UTF-8
 		// -------------------------------------------
-		if (@iconv('UTF-8', 'UTF-8', $string)) return array("", "UTF-8", 100);
+		if (@iconv('UTF-8', 'UTF-8', $string)) {
+			$percent = 100 - 100/preg_match_all('~[\x80-\xFF]~', $string, $matches);
+			return array("", "UTF-8", $percent);
+		}
 
 		// TEST MULTIBYTE ENCODINGS
 		// ------------------------
@@ -54,7 +57,10 @@ function EncoDet($string) {
 
 		// IF GB18030 COMPLIANT THEN ASSUMED TO BE GB18030
 		// -------------------------------------------
-		if (@iconv('GB18030', 'GB18030', $string)) return array($encoding[0], "GB18030", 50);
+		if (@iconv('GB18030', 'GB18030', $string)) {
+			$percent = 100 - 100/preg_match_all('~[\x80-\xFF]~', $string, $matches);
+			return array($encoding[0], "GB18030", $percent);
+		}
 	}
 
 	// TEST SINGLE BYTE LATIN NON-ENGLISH ENCODINGS
@@ -63,7 +69,11 @@ function EncoDet($string) {
 	$encoding = SM_latin_language($string);
 	if ($encoding[1] == "") {
 		// all single-byte encodings exhausted, retry GB18030 as it was queried on >2 high bytes only
-		if (@iconv('GB18030', 'GB18030', $string)) $encoding = array($encoding[0], "GB18030", 50);
+		if (@iconv('GB18030', 'GB18030', $string)) {
+			$percent = 100 - 100/preg_match_all('~[\x80-\xFF]~', $string, $matches);
+			if ($percent >= 50) $encoding = array($encoding[0], "GB18030", $percent);
+			else $encoding = array($encoding[0], "Unknown", 0);
+		}
 		else $encoding = array($encoding[0], "Unknown", 0);
 	}
 
