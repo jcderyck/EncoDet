@@ -60,7 +60,7 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 
 			$wordUTF = iconv($encoding, 'UTF-8', $word);
 	
-			// number of words >3 letters with one or two uncommon symbols in it
+			// Words >3 letters with one or two uncommon symbols in it
 			$result1 = preg_match_all('~\p{L}[^'.$common_symbols[0].'\w\x00-\x7F]\p{L}~u', $wordUTF, $matches1); // a╝a
 			$result1 += preg_match_all('~\p{L}[^'.$common_symbols[0].'\w\x00-\x7F]{2}~u', $wordUTF, $matches2);  // a╝║
 			$result1 += preg_match_all('~[^'.$common_symbols[0].'\w\x00-\x7F]{2}\p{L}~u', $wordUTF, $matches3);  // ╝║a
@@ -72,7 +72,7 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 				if ($faults[$encoding] > 10) {unset($encodings[$key]); break 1;}
 			}
 
-			// number of words with two or more uppercase letters followed by lowercase letter
+			// Words with two or more uppercase letters followed by lowercase letter
 			$result1 = preg_match_all('~[^\P{Lu}I][^\P{Lu}A-Z][^\P{Ll}l]~u', $wordUTF, $matches1); // AÄa AÄä ÄÄa ÄÄä
 			$result1 += preg_match_all('~[^\P{Lu}A-Z][A-HJ-Z][^\P{Ll}l]~u', $wordUTF, $matches2);  // ÄAa ÄAä
 			$result1 += preg_match_all('~[A-HJ-Z][A-HJ-Z][^\P{Ll}a-z]~u', $wordUTF, $matches3);  // AAä
@@ -83,7 +83,7 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 				if ($faults[$encoding] > 10) {unset($encodings[$key]); break 1;}
 			}
 
-			// lowercase letters followed by uppercase
+			// Lowercase letters followed by uppercase
 			$result1 = preg_match_all('~[a-km-z][^\P{Lu}A-Z]~u', $wordUTF, $matches1); // aÄ
 			$result1 += preg_match_all('~[^\P{Ll}a-z][^\P{Lu}I]~u', $wordUTF, $matches2); // äA äÄ
 			if ($result1) {
@@ -93,8 +93,17 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 				if ($faults[$encoding] > 10) {unset($encodings[$key]); break 1;}
 			}
 
-			// number of C1 control codes
+			// C1 control codes
 			$result1 = preg_match_all('~[\x{0080}-\x{009F}]~u', $wordUTF, $matches);
+			if ($result1) {
+//				echo $encoding; echo $wordUTF; echo $value; var_dump($matches);
+				$results[$encoding] -= 0.01*$value*$result1;
+				$faults[$encoding] += $value*$result1;
+				if ($faults[$encoding] > 10) {unset($encodings[$key]); break 1;}
+			}
+			
+			// ß between two consonants
+			$result1 = preg_match_all('~[bcdfghjkmnpqrstvwxz]ß[bcdfghjkmnpqrstvwxz]~ui', $wordUTF, $matches);
 			if ($result1) {
 //				echo $encoding; echo $wordUTF; echo $value; var_dump($matches);
 				$results[$encoding] -= 0.01*$value*$result1;
