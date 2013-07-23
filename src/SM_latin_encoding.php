@@ -184,7 +184,7 @@ function SM_latin_encoding($encodings, $lang_name, $string) {
 	}
 
 	foreach ($encodings as $key=>$encoding) $results[$encoding] /= $total;
-var_dump($results);
+
 	$top_result = max($results);
 
 	if ($top_result < 50) return array("", 0);
