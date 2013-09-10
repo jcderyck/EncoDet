@@ -114,6 +114,7 @@
 		'Lithuanian'=>array("šėžąųūįčę"),
 		'Polish'=>array("ęłśążóćźń"),
 		'Romanian'=>array("ăîţşâ"),
+		'Roman_Macedonian'=>array("šžčǵḱđć"),
 		'Slovak'=>array("ážščíťýúéľôďňäóŕĺ"),
 		'Slovenian'=>array("čšžć"),
 		'Turkish'=>array("ıüşçğö"),

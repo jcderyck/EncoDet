@@ -110,7 +110,7 @@ function SM_latin_language($string) {
 			$encodings = array('CP1250', 'CP1252', 'ISO-8859-2', 'MacRomania', 'MacCentralEurope', 'CP852');
 			break;
 
-		case 'Serbo_Croat':
+		case 'Serbo_Croat'; case 'Roman_Macedonian':
 			$encodings = array('CP1250', 'CP1252', 'ISO-8859-2', 'MacCroatian', 'MacCentralEurope', 'CP852');
 			break;
 
